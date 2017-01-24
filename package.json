@@ -1,0 +1,18 @@
+{
+  "name": "Astronomical",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "clean": "/bin/sh ./.scripts/clean.sh"
+  },
+  "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.10.2",
+    "material-ui": "^0.15.4",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.2.1",
+    "react-dom": "^15.1.0",
+    "react-router": "^3.0.0",
+    "react-tap-event-plugin": "^2.0.1"
+  }
+}
