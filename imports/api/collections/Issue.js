@@ -7,33 +7,13 @@ Schemas.issue = new SimpleSchema({
     type: String,
     label: "Name of issue"
   },
-  "series": {
+  "filepath":{
     type: String,
-    label: "Parent series mongoID"
+    label: "where is this issue located?"
   },
   "number": {
     type: Number,
-    label: "the number inside of the series"
-  },
-  "comicvineid": {
-    type: String,
-    label: "Random string assigned by the api used by the scanner"
-  },
-  "description": {
-    type: String,
-    label: "Here is a description"
-  },
-  "characters": {
-    type: String,
-    label: "a list of characters appearing in this issue"
-  },
-  "image": {
-    type: String,
-    label: "link to the image file used as the cover"
-  },
-  "credits": {
-    type: String,
-    label: "Creators deserve credit too, seriously let them have it!"
+    label: "Release number of this issue, Invincible Iron Man #2 etc. . ."
   },
   "createdAt": {
     type: Date,
@@ -48,4 +28,4 @@ Schemas.issue = new SimpleSchema({
 
 Issue.attachSchema(Schemas.issue)
 
-export default issue
+export default Issue

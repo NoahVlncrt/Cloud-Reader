@@ -1,24 +1,38 @@
 import { Meteor } from 'meteor/meteor';
 var fs = require("fs");
 
+import Series from '/imports/api/collections/Series.js';
+
 const AllComics = Meteor.settings.private.pathtocomics;
 
 const comicSeries = []
 
-const ReadComicDirectory = function(){
-    fs.readdir(AllComics, (err,files) => {
-        console.log(files)
+
+const CreateNewIssue = {
+
+}
+
+const CreateNewSeries = function(dir){
+    fs.readdir(dir, (err, files) => {
         files.forEach( file => {
-            console.log(AllComics+file)
-            fs.stat(AllComics+file, (err, stats) => {
+
+        })
+    })
+}
+
+const ReadComicDirectory = function(){
+    console.log("Scanning directory for files")
+    fs.readdir(AllComics, (err,files) => {
+        files.forEach( file => {
+            const newfile = AllComics+file
+            fs.stat(newfile, (err, stats) => {
                 if(stats.isDirectory()){
-                    console.log("you've done it")
-                } else {
-                    console.log("Damn you failed man")
+                       
                 }
             })    
         })
     })
+    console.log("Found "+comicSeries.length+" Adding them now")
 }
 
 export {ReadComicDirectory}

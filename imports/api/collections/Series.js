@@ -7,25 +7,23 @@ Schemas.series = new SimpleSchema({
     type: String,
     label: "Collection Name"
   },
-  "summary": {
-    type: String,
-    label: "Brief summary of the series"
+  "issues": {
+    type: [ String ],
+    label: "all the issues that belong to this series",
+    autoValue: function(){
+      if(this.isInsert){
+        return []
+      }
+    }
   },
-  "description": {
-    type: String,
-    label: "Not to be confused with the summary because those are defidentaly different things?"
-  },
-  "comicvineid": {
-    type: String,
-    label: "The id from the comic vine db"
-  },
-  "image": {
-    type: String,
-    label: "link to the image stored in the file system"
-  },
-  "publisher": {
-    type: String,
-    label: "there are more than just Marvel and DC you know!"
+  "tags": {
+    type: [ String ],
+    label: "All tags given to the series by the user (psssst that's you ;)",
+    autoValue: function(){
+      if(this.isInsert){
+        return []
+      }
+    }
   },
   "createdAt": {
     type: Date,
