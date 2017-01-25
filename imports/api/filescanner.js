@@ -8,31 +8,29 @@ const AllComics = Meteor.settings.private.pathtocomics;
 const comicSeries = []
 
 
-const CreateNewIssue = {
-
-}
-
-const CreateNewSeries = function(dir){
-    fs.readdir(dir, (err, files) => {
+const CreateNewIssue = function(filepath){
+    seriesId = Series.findOne({path: filepath})._id
+    fs.readdir(filepath, (err,files) => {
         files.forEach( file => {
-
+            console.log(file)
         })
     })
 }
 
 const ReadComicDirectory = function(){
     console.log("Scanning directory for files")
-    fs.readdir(AllComics, (err,files) => {
+    fs.readdir(AllComics, Meteor.bindEnvironment((function(err,files){
         files.forEach( file => {
+            const ogfile = file
             const newfile = AllComics+file
-            fs.stat(newfile, (err, stats) => {
+            fs.stat(newfile, Meteor.bindEnvironment(function(err, stats){
                 if(stats.isDirectory()){
-                       
+                    Series.insert({name: ogfile, path: newfile})
+                    CreateNewIssue(newfile)
                 }
-            })    
+            }))
         })
-    })
-    console.log("Found "+comicSeries.length+" Adding them now")
+    })))
 }
 
 export {ReadComicDirectory}

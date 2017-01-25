@@ -25,6 +25,10 @@ Schemas.series = new SimpleSchema({
       }
     }
   },
+  "path": {
+    type: String,
+    label: "Path to series in file system"
+  },
   "createdAt": {
     type: Date,
     label: "Date Created At",
