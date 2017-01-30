@@ -7,15 +7,6 @@ Schemas.series = new SimpleSchema({
     type: String,
     label: "Collection Name"
   },
-  "issues": {
-    type: [ String ],
-    label: "all the issues that belong to this series",
-    autoValue: function(){
-      if(this.isInsert){
-        return []
-      }
-    }
-  },
   "tags": {
     type: [ String ],
     label: "All tags given to the series by the user (psssst that's you ;)",

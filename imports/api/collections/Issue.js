@@ -11,9 +11,14 @@ Schemas.issue = new SimpleSchema({
     type: String,
     label: "where is this issue located?"
   },
-  "number": {
-    type: Number,
-    label: "Release number of this issue, Invincible Iron Man #2 etc. . ."
+  "parentSeries": {
+    type: [String],
+    label: "id to the series it belongs in",
+    autoValue: function(){
+      if(this.isInsert){
+        return []
+      }
+    }
   },
   "createdAt": {
     type: Date,
