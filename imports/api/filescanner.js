@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 var fs = require("fs");
-var unzip = require("unzip");
 
 import Series from '/imports/api/collections/Series.js';
 import Issue from '/imports/api/collections/Issue.js';
@@ -41,8 +40,10 @@ const ReadComicDirectory = function(){
             const newfile = AllComics+file
             fs.stat(newfile, Meteor.bindEnvironment(function(err, stats){
                 if(stats.isDirectory()){
-                    Series.insert({name: ogfile, path: newfile})
-                    PopulateSeries(newfile)
+                    if(!Series.findOne({path: newfile})){
+                        Series.insert({name: ogfile, path: newfile})
+                        PopulateSeries(newfile)
+                    }
                 }
             }))
         })
