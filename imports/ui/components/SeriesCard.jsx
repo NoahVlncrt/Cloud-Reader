@@ -4,6 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 
 export default class SeriesCover extends React.Component{
+
+    FetchSeriesCover = () => {
+        // take file path and extract the first file then store it as an image somewhere.... god only knows how that's is going to work.
+    }
+
     render(){
         return(
             <Card>

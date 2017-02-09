@@ -7,6 +7,11 @@ Schemas.series = new SimpleSchema({
     type: String,
     label: "Collection Name"
   },
+  "cover": {
+    type: String,
+    label: "path to cover img",
+    optional: true
+  },
   "tags": {
     type: [ String ],
     label: "All tags given to the series by the user (psssst that's you ;)",

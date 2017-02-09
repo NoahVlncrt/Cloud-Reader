@@ -12,13 +12,8 @@ Schemas.issue = new SimpleSchema({
     label: "where is this issue located?"
   },
   "parentSeries": {
-    type: [String],
-    label: "id to the series it belongs in",
-    autoValue: function(){
-      if(this.isInsert){
-        return []
-      }
-    }
+    type: String,
+    label: "id to the series it belongs in"
   },
   "createdAt": {
     type: Date,

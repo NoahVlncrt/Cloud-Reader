@@ -6,7 +6,7 @@ import RackPage from '/imports/ui/pages/rack.jsx';
 
 import Series from '/imports/api/collections/Series.js';
 
-export default demosPageContainer = createContainer(({params}) => {
+export default RackPageContainer = createContainer(({params}) => {
 
   return {
       AllSeries: Series.find().fetch()

@@ -9,7 +9,7 @@ import BlankLayout from '/imports/ui/layouts/BlankLayout.jsx';
 import SignUpPage from '/imports/ui/pages/SignUp.jsx';
 import LoginPage from '/imports/ui/pages/login.jsx';
 
-import RackPageContainer from '/imports/api/containers/RackPageContainer';
+import RackPageContainer from '/imports/api/containers/RackPageContainer.jsx';
 
 export const renderRoutes = () => (
   <Router history={browserHistory}>
