@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 var fs = require("fs");
+var unzip = require("unzip");
+
 
 import Series from '/imports/api/collections/Series.js';
 import Issue from '/imports/api/collections/Issue.js';
-var AdmZip = require('adm-zip');
 
 
 const AllComics = Meteor.settings.private.pathtocomics;
@@ -14,19 +15,28 @@ const basePath = process.env.PWD
 
 const extensionSearch = /\.cbr|\.cbz/
 
-const getSeriesCover = function(zip){
-    var zip = new AdmZip(zip)
-    entries = zip.getEntries()
+const getSeriesCover = function(zip,ogfile){
     const coverRegex = /(000)/
-
-    console.log(entries[1].entryName)
+    fs.createReadStream(zip)
+        .pipe(unzip.Parse())
+        .on('entry', function(entry) {
+            var filename = entry.path
+            if(coverRegex.test(filename)){
+                entry.pipe(fs.createWriteStream(basePath+"/public/covers/"+ogfile+"/"+"cover.jpg"))
+            } else {
+                entry.autodrain();
+            }
+        })
 }
 
 //scans the directory passed to it, cleans up all filenames, checks extensions, and adds them to issue
-const PopulateSeries = function(filepath){
+const PopulateSeries = function(filepath,ogfile){
     const seriesId = Series.findOne({path: filepath})._id
     fs.readdir(filepath, Meteor.bindEnvironment(function(err,files){
-        getSeriesCover(filepath+"/"+file)
+        
+        fs.mkdir(basePath+"/public/covers/"+ogfile)
+        getSeriesCover(filepath+"/"+files[0],ogfile)
+
         files.forEach(function(file) {
             var currentDirectory = filepath+"/"+file //complete path to zip file 'directory/place/item.zip' etc...
             if(file.match(extensionSearch)){
@@ -54,7 +64,7 @@ const ReadComicDirectory = function(){
                 if(stats.isDirectory()){
                    // if(!Series.findOne({path: newfile})){
                         Series.insert({name: ogfile, path: newfile})
-                        PopulateSeries(newfile)
+                        PopulateSeries(newfile,ogfile)
                     //}
                 }
             }))
