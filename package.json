@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor --settings settings.json",
-    "fresh": "rm -rf public/covers/ && meteor reset && meteor --settings settings.json",
+    "fresh": "meteor reset && meteor --settings settings.json",
     "clean": "/bin/sh ./.scripts/clean.sh"
   },
   "dependencies": {

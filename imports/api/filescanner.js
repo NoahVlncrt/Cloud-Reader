@@ -16,13 +16,18 @@ const basePath = process.env.PWD
 const extensionSearch = /\.cbr|\.cbz/
 
 const getSeriesCover = function(zip,ogfile){
-    const coverRegex = /(000)/
+    let counter = 0 
     fs.createReadStream(zip)
-        .pipe(unzip.Parse())
+        .pipe(unzip.Parse())    
         .on('entry', function(entry) {
-            var filename = entry.path
-            if(coverRegex.test(filename)){
-                entry.pipe(fs.createWriteStream(basePath+"/public/covers/"+ogfile+"/"+"cover.jpg"))
+            filename = entry.path;
+            if(entry.type === 'File'){
+                if(counter < 1){
+                    entry.pipe(fs.createWriteStream(basePath+"/public/covers/"+ogfile+"/"+"cover.jpg"))
+                    counter =+ 1
+                } else {
+                    entry.autodrain()
+                }
             } else {
                 entry.autodrain();
             }
@@ -33,7 +38,6 @@ const getSeriesCover = function(zip,ogfile){
 const PopulateSeries = function(filepath,ogfile){
     const seriesId = Series.findOne({path: filepath})._id
     fs.readdir(filepath, Meteor.bindEnvironment(function(err,files){
-        
         fs.mkdir(basePath+"/public/covers/"+ogfile)
         getSeriesCover(filepath+"/"+files[0],ogfile)
 
@@ -62,10 +66,11 @@ const ReadComicDirectory = function(){
             const newfile = AllComics+file
             fs.stat(newfile, Meteor.bindEnvironment(function(err, stats){
                 if(stats.isDirectory()){
-                   // if(!Series.findOne({path: newfile})){
-                        Series.insert({name: ogfile, path: newfile})
+                   if(!Series.findOne({path: newfile})){
+                        console.log("adding "+ogfile+" to server")
+                        Series.insert({name: ogfile, path: newfile, cover: "/covers/"+ogfile+"/cover.jpg"})
                         PopulateSeries(newfile,ogfile)
-                    //}
+                    }
                 }
             }))
         })
