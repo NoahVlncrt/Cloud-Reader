@@ -12,12 +12,23 @@ export default class RackPage extends React.Component{
     }
 
     render(){
+        const Styles = {
+            container: {
+                display: "flex",
+                alignItems: "flex-start",
+                flexWrap: "wrap",
+                justifyContent: "space-between"
+            }
+        }
+
         return(
             <div>
             <h3>All Series</h3>
-                {this.props.AllSeries.map((series) => {
-                    return <SeriesCover cover={series.cover} name={series.name} key={series._id}/>
-                })}   
+                <div style={Styles.container}>
+                    {this.props.AllSeries.map((series) => {
+                        return <SeriesCover cover={series.cover} name={series.name} key={series._id}/>
+                    })}
+                </div>   
             </div>
         )
     }
