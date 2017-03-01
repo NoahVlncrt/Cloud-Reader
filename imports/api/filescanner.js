@@ -83,7 +83,6 @@ const PopulateSeries = function(filepath, ogfile) {
 
 //scans entire directory specified by the user in the settings and returns all the folders
 const ReadComicDirectory = function() {
-    console.log("Scanning directory for files")
     if (!AllComics) {
         return "There doesn't seem to be anything here :("
     }
