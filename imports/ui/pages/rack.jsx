@@ -16,8 +16,7 @@ export default class RackPage extends React.Component{
             container: {
                 display: "flex",
                 alignItems: "flex-start",
-                flexWrap: "wrap",
-                justifyContent: "space-between"
+                flexWrap: "wrap"
             }
         }
 

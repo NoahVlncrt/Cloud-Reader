@@ -4,6 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Navigation from '/imports/ui/components/Navigation.jsx';
 
+
+
 export default class MainLayout extends React.Component{
   render(){
     return(
