@@ -1,5 +1,5 @@
 {
-    "name": "Cloud Comics",
+    "name": "CloudComics",
     "private": true,
     "scripts": {
         "start": "meteor --settings settings.json",
