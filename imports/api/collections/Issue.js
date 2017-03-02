@@ -11,6 +11,10 @@ Schemas.issue = new SimpleSchema({
         type: String,
         label: "where is this issue located?"
     },
+    "number": {
+        type: Number,
+        label: "used for internal purposes"
+    },
     "read": {
         type: Boolean,
         label: "did you read this?",

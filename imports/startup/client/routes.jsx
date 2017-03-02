@@ -10,11 +10,13 @@ import SignUpPage from '/imports/ui/pages/SignUp.jsx';
 import LoginPage from '/imports/ui/pages/login.jsx';
 
 import RackPageContainer from '/imports/api/containers/RackPageContainer.jsx';
+import SeriesPageContainer from '/imports/api/containers/SeriesPageContainer.jsx';
 
 export const renderRoutes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={MainLayout}>
       <IndexRoute component={RackPageContainer}/>
+      <Route path="/series/:id" component={SeriesPageContainer}/>
     </Route>
     <Route path="/signup" component={BlankLayout}>
       <IndexRoute component={SignUpPage}/>
